@@ -11,4 +11,5 @@ router.patch('/:id', validateRequest(UserValidation.update),UserController.updat
 
 router.delete('/:id',UserController.deleteByIdFromDB);
 
+
 export const userRoutes = router;

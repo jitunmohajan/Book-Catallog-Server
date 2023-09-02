@@ -77,9 +77,11 @@ const deleteByIdFromDB = async (id: string): Promise<IUser> => {
     return result;
 };
 
+
+
 export const UserService ={
     getAllFromDB,
     getByIdFromDB,
     updateOneInDB,
-    deleteByIdFromDB
+    deleteByIdFromDB,
 }

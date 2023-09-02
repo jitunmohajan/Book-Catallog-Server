@@ -53,9 +53,9 @@ const signin = async (payload:ILoginUser):Promise<ILoginUserResponse>=>{
     }
 
 
-    const { email: userEmail, role } = isUserExist;
+    const { id, role } = isUserExist;
     const token = jwtHelpers.createToken(
-        { userEmail, role },
+        { id, role },
         config.jwt.secret as Secret,
         config.jwt.expires_in as string
     );
