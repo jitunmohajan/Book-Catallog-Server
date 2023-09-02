@@ -8,6 +8,9 @@ const create = z.object({
         email: z.string({
             required_error: 'Email is required'
         }),
+        password: z.string({
+            required_error: 'Email is required'
+        }),
         role: z.string({
             required_error: 'role id is required'
         }),
@@ -23,6 +26,18 @@ const create = z.object({
     })
 });
 
+const signin = z.object({
+    body: z.object({
+        email: z.string({
+            required_error: 'Email is required'
+        }),
+        password: z.string({
+            required_error: 'Email is required'
+        })
+    })
+});
+
 export const AuthValidation = {
-    create
+    create,
+    signin
 };

@@ -9,7 +9,7 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
-        message: 'Users  fetched successfully',
+        message: 'Users  retrieved successfully',
         data: result
     });
 });
@@ -25,7 +25,31 @@ const getByIdFromDB = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const updateOneInDB = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await UserService.updateOneInDB(id, req.body);
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'User  updated successfully',
+        data: result
+    });
+});
+
+const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const result = await UserService.deleteByIdFromDB(id);
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'User delete successfully',
+        data: result
+    });
+});
+
 export const UserController = {
     getAllFromDB,
     getByIdFromDB,
+    updateOneInDB,
+    deleteByIdFromDB
 }
