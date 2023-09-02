@@ -25,6 +25,14 @@ model User {
   @@map("users")
 }
 
+model Category {
+  id    String @id @default(uuid())
+  title String
+  books Book[]
+
+  @@map("categories")
+}
+
 
 
 enum userRoleType {
