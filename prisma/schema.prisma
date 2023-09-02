@@ -48,6 +48,20 @@ model Book {
   @@map("books")
 }
 
+model ReviewAndRating {
+  id     String @id @default(uuid())
+  review String
+  rating Int
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id])
+
+  @@map("review_and_ratings")
+}
+
 
 
 enum userRoleType {
