@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/create-book', validateRequest(BookValidation.create),BookController.insertIntoDB)
 router.get('/', BookController.getAllFromDB)
-// router.get('/:id', BookController.getByIdFromDB)
+router.get('/:id', BookController.getByIdFromDB)
 // router.patch('/:id', validateRequest(BookValidation.update),BookController.updateOneInDB)
 // router.delete('/:id', BookController.deleteByIdFromDB)
 
