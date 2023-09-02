@@ -33,6 +33,21 @@ model Category {
   @@map("categories")
 }
 
+model Book {
+  id              String @id @default(uuid())
+  title           String
+  author          String
+  price           String
+  genre           String
+  publicationDate String
+
+  categoryId       String
+  category         Category          @relation(fields: [categoryId], references: [id])
+  reviewAndRatings ReviewAndRating[]
+
+  @@map("books")
+}
+
 
 
 enum userRoleType {
