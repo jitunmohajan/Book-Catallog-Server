@@ -14,7 +14,7 @@ const createUser = async (data: User):Promise<IUser>=>{
         Number(config.bycrypt_salt_rounds)
     );
     const result = await prisma.user.create({
-        data,
+        data,  
         select: {
             id: true,
             name: true,
