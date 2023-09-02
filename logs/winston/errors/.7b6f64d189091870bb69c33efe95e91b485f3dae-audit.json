@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\jitun\\OneDrive\\Desktop\\assignment-8\\logs\\winston\\errors\\.7b6f64d189091870bb69c33efe95e91b485f3dae-audit.json",
+    "files": [
+        {
+            "date": 1693639971012,
+            "name": "C:\\Users\\jitun\\OneDrive\\Desktop\\assignment-8\\logs\\winston\\errors\\phu-2023-02-09-13-error.log",
+            "hash": "6df5fc76da7af15aa062b9a350bba81cb943babb5076704cde4fdd19206a01f7"
+        }
+    ],
+    "hashType": "sha256"
+}
