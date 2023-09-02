@@ -9,7 +9,7 @@ router.post('/create-category', validateRequest(CategoryValidation.create),Categ
 router.get('/', CategoryController.getAllFromDB)
 router.get('/:id', CategoryController.getByIdFromDB)
 router.patch('/:id', validateRequest(CategoryValidation.update),CategoryController.updateOneInDB)
-// router.delete('/:id', CategoryController.deleteByIdFromDB)
+router.delete('/:id', CategoryController.deleteByIdFromDB)
 
 
 
