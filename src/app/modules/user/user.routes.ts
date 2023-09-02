@@ -9,6 +9,6 @@ router.get('/', UserController.getAllFromDB)
 router.get('/:id', UserController.getByIdFromDB)
 router.patch('/:id', validateRequest(UserValidation.update),UserController.updateOneInDB);
 
-// router.delete('/:id',UserController.deleteByIdFromDB);
+router.delete('/:id',UserController.deleteByIdFromDB);
 
 export const userRoutes = router;
