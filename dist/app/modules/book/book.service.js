@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookService = void 0;
-const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const paginationHelper_1 = require("../../../helpers/paginationHelper");
+const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const book_constant_1 = require("./book.constant");
 const insertIntoDB = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.book.create({
@@ -27,7 +27,7 @@ const insertIntoDB = (data) => __awaiter(void 0, void 0, void 0, function* () {
 });
 const getAllFromDB = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit: size, page, skip } = paginationHelper_1.paginationHelpers.calculatePagination(options);
-    const { search, minPrice, maxPrice } = filters;
+    const { search, minPrice, maxPrice, category } = filters;
     const andConditions = [];
     if (search) {
         andConditions.push({
@@ -37,6 +37,11 @@ const getAllFromDB = (filters, options) => __awaiter(void 0, void 0, void 0, fun
                     mode: 'insensitive'
                 }
             }))
+        });
+    }
+    if (category) {
+        andConditions.push({
+            categoryId: category
         });
     }
     if (minPrice) {

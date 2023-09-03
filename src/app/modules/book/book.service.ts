@@ -1,10 +1,10 @@
 import { Book, Prisma } from "@prisma/client";
-import prisma from "../../../shared/prisma";
-import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
 import { IGenericResponse } from "../../../interfaces/common";
-import { IBookFilterRequest } from "./book.interface";
+import { IPaginationOptions } from "../../../interfaces/pagination";
+import prisma from "../../../shared/prisma";
 import { bookSearchableFields } from "./book.constant";
+import { IBookFilterRequest } from "./book.interface";
 
 
 const insertIntoDB = async(data: Book):Promise<Book> =>{
@@ -19,7 +19,7 @@ const insertIntoDB = async(data: Book):Promise<Book> =>{
  
 const getAllFromDB = async(filters: IBookFilterRequest, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> =>{
     const { limit:size, page, skip } = paginationHelpers.calculatePagination(options);
-    const { search, minPrice, maxPrice  } = filters;
+    const { search, minPrice, maxPrice, category  } = filters;
     
     const andConditions = [];
 
@@ -32,6 +32,12 @@ const getAllFromDB = async(filters: IBookFilterRequest, options: IPaginationOpti
                 }
             }))
         });
+    }
+
+    if(category){
+        andConditions.push({
+            categoryId: category
+        });   
     }
 
     if (minPrice) {

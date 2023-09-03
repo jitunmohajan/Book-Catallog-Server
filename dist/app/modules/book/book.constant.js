@@ -5,6 +5,7 @@ exports.bookFilterableFields = [
     'search',
     'minPrice',
     'maxPrice',
+    'category',
     'title',
     'author',
     'genre',

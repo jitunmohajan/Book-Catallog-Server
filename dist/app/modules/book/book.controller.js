@@ -31,7 +31,7 @@ const insertIntoDB = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
 const getAllFromDB = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filters = (0, pick_1.default)(req.query, book_constant_1.bookFilterableFields);
     console.log(filters);
-    const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder', 'minPrice', 'maxPrice', 'search']);
+    const options = (0, pick_1.default)(req.query, ['limit', 'page', 'sortBy', 'sortOrder', 'minPrice', 'maxPrice', 'category', 'search']);
     const result = yield book_service_1.BookService.getAllFromDB(filters, options);
     (0, sendResponse_1.default)(res, {
         success: true,
