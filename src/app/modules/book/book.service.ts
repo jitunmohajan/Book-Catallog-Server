@@ -20,8 +20,6 @@ const insertIntoDB = async(data: Book):Promise<Book> =>{
 const getAllFromDB = async(filters: IBookFilterRequest, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> =>{
     const { limit:size, page, skip } = paginationHelpers.calculatePagination(options);
     const { search, minPrice, maxPrice  } = filters;
-    // const min = parseInt(minPrice);
-    // const max = parseInt(maxPrice);
     
     const andConditions = [];
 
@@ -37,17 +35,19 @@ const getAllFromDB = async(filters: IBookFilterRequest, options: IPaginationOpti
     }
 
     if (minPrice) {
+        const min = parseFloat(minPrice);
         andConditions.push({
             price:{
-                gte: minPrice
+                gte: min
             }
         });   
     }
 
     if (maxPrice) {
+         const max = parseFloat(maxPrice);
         andConditions.push({
             price:{
-                lte: maxPrice
+                lte: max
             }
         });   
     }

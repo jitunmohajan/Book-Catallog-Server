@@ -28,8 +28,6 @@ const insertIntoDB = (data) => __awaiter(void 0, void 0, void 0, function* () {
 const getAllFromDB = (filters, options) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit: size, page, skip } = paginationHelper_1.paginationHelpers.calculatePagination(options);
     const { search, minPrice, maxPrice } = filters;
-    // const min = parseInt(minPrice);
-    // const max = parseInt(maxPrice);
     const andConditions = [];
     if (search) {
         andConditions.push({
@@ -42,16 +40,18 @@ const getAllFromDB = (filters, options) => __awaiter(void 0, void 0, void 0, fun
         });
     }
     if (minPrice) {
+        const min = parseFloat(minPrice);
         andConditions.push({
             price: {
-                gte: minPrice
+                gte: min
             }
         });
     }
     if (maxPrice) {
+        const max = parseFloat(maxPrice);
         andConditions.push({
             price: {
-                lte: maxPrice
+                lte: max
             }
         });
     }

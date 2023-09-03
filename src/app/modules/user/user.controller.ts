@@ -42,7 +42,7 @@ const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,
-        message: 'User delete successfully',
+        message: 'User deleted successfully',
         data: result
     });
 });
