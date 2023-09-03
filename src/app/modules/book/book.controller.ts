@@ -4,6 +4,7 @@ import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { BookService } from "./book.service";
 import pick from "../../../shared/pick";
+import { bookFilterableFields } from "./book.constant";
 
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
@@ -17,7 +18,10 @@ const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
-    const result = await BookService.getAllFromDB();
+    const filters = pick(req.query, bookFilterableFields);
+    console.log(filters);
+    const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder', 'minPrice', 'maxPrice','search']);
+    const result = await BookService.getAllFromDB(filters, options);
     sendResponse(res, {
         success: true,
         statusCode: httpStatus.OK,

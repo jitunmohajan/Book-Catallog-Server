@@ -1,8 +1,10 @@
-import { Book } from "@prisma/client";
+import { Book, Prisma } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
 import { IGenericResponse } from "../../../interfaces/common";
+import { IBookFilterRequest } from "./book.interface";
+import { bookSearchableFields } from "./book.constant";
 
 
 const insertIntoDB = async(data: Book):Promise<Book> =>{
@@ -15,14 +17,70 @@ const insertIntoDB = async(data: Book):Promise<Book> =>{
     return result;
 }
  
-const getAllFromDB = async():Promise<Book[]> =>{
-    const result = await prisma.book.findMany({
-        include:{
-            category: true
-        } 
-    })
+const getAllFromDB = async(filters: IBookFilterRequest, options: IPaginationOptions): Promise<IGenericResponse<Book[]>> =>{
+    const { limit:size, page, skip } = paginationHelpers.calculatePagination(options);
+    const { search, minPrice, maxPrice  } = filters;
+    const min = parseInt(minPrice);
+    const max = parseInt(maxPrice);
+    
+    const andConditions = [];
 
-    return result;
+    if (search) {
+        andConditions.push({
+            OR: bookSearchableFields.map((field) => ({
+                [field]: {
+                    contains: search,
+                    mode: 'insensitive'
+                }
+            }))
+        });
+    }
+
+    if (minPrice) {
+        andConditions.push({
+            price:{
+                gte: min
+            }
+        });   
+    }
+
+    if (maxPrice) {
+        andConditions.push({
+            price:{
+                lte: max
+            }
+        });   
+    }
+
+    const whereConditions: Prisma.BookWhereInput = andConditions.length>0 ? { AND: andConditions } : {};
+
+    
+
+
+    const result = await prisma.book.findMany({
+        where: whereConditions,
+        skip,
+        take: size,
+        orderBy:
+            options.sortBy && options.sortOrder
+                ? { [options.sortBy]: options.sortOrder }
+                : {
+                    price: 'desc'
+                }
+    });
+
+
+    const total = result.length;
+    const totalPage = (total+size)/size-(total/size);
+    return {
+        meta: {
+            page,
+            size,
+            total,
+            totalPage
+        },
+        data: result
+    };
 }
 
 const getByIdFromDB = async (id: string): Promise<Book | null> => {

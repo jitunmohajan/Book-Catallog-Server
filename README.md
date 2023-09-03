@@ -1,5 +1,6 @@
 Application Routes:
 User
+<!-- api/v1/auth/signin (POST) -->
 <!-- api/v1/auth/signup (POST) -->
 <!-- api/v1/users (GET) -->
 <!-- api/v1/users/6177a5b87d32123f08d2f5d4 (Single GET) Include an id that is saved in your database -->
@@ -14,7 +15,7 @@ Category
 <!-- api/v1/categories/6177a5b87d32123f08d2f5d4 (DELETE) Include an id that is saved in your database -->
 Books
 <!-- api/v1/books/create-book (POST) -->
-api/v1/books (GET)
+<!-- api/v1/books (GET) -->
 <!-- api/v1/books/:categoryId/category (GET) -->
 <!-- api/v1/books/:id (GET) -->
 <!-- api/v1/books/:id (PATCH) -->
