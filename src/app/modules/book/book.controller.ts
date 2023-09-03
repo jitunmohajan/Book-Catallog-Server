@@ -3,6 +3,7 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { BookService } from "./book.service";
+import pick from "../../../shared/pick";
 
 
 const insertIntoDB = catchAsync(async (req: Request, res: Response) => {
@@ -58,10 +59,23 @@ const deleteByIdFromDB = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+const getCategoryBooksByIdFromDB = catchAsync(async (req: Request, res: Response) => {
+    const { categoryId } = req.params;
+    const options = pick(req.query, ['limit', 'page']);
+    const result = await BookService.getCategoryBooksByIdFromDB(categoryId, options);
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'Book fetched successfully',
+        data: result
+    });
+});
+
 export const BookController = {
     insertIntoDB,
     getAllFromDB,
     getByIdFromDB,
     updateOneInDB,
-    deleteByIdFromDB
+    deleteByIdFromDB,
+    getCategoryBooksByIdFromDB
 }

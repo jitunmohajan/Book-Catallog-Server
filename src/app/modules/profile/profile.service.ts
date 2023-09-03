@@ -7,7 +7,6 @@ import httpStatus from "http-status";
 import prisma from "../../../shared/prisma";
 
 const getProfile = async (token:string | undefined): Promise<IUser | null> => {
-    console.log('testing profile')
     let verifiedUser = null;
     if(!token){
         throw new ApiError(httpStatus.FORBIDDEN, 'Invalid Refresh Token');
@@ -22,6 +21,15 @@ const getProfile = async (token:string | undefined): Promise<IUser | null> => {
         where: {
             id
         }, 
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            role: true,
+            contactNo: true,
+            address: true,
+            profileImg: true,
+        },
     });
     return result;
 };

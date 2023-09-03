@@ -15,11 +15,11 @@ Category
 Books
 <!-- api/v1/books/create-book (POST) -->
 api/v1/books (GET)
-api/v1/books/:categoryId/category (GET)
+<!-- api/v1/books/:categoryId/category (GET) -->
 <!-- api/v1/books/:id (GET) -->
 <!-- api/v1/books/:id (PATCH) -->
 <!-- api/v1/books/:id (DELETE) -->
 Orders
-api/v1/orders/create-order (POST)
-api/v1/orders (GET)
-api/v1/orders/:orderId (GET)
+<!-- api/v1/orders/create-order (POST) -->
+<!-- api/v1/orders (GET) -->
+<!-- api/v1/orders/:orderId (GET) -->

@@ -11,6 +11,7 @@ router.get('/', BookController.getAllFromDB)
 router.get('/:id', BookController.getByIdFromDB)
 router.patch('/:id', validateRequest(BookValidation.update),BookController.updateOneInDB)
 router.delete('/:id', BookController.deleteByIdFromDB)
+router.get('/:categoryId/category', BookController.getCategoryBooksByIdFromDB)
 
 
 
